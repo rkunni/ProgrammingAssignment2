@@ -34,22 +34,22 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
 	# get the value of the matrix inverse
-	i <- x$getinv()
+	inv <- x$getinv()
 	
-	if (!is.null(i)) {
-	# the inverse is already computed
+	if (!is.null(inv)) {
+	# the inverse is already computed and available in cache
 		message("getting cached data")
-		return(i)
+		return(inv)
 	}
 	
-	# calculate the inverse
+	# the inverse is not available, calculate the inverse
 
 	# get the matrix
-	m <- x$getmatrix()
+	mat <- x$getmatrix()
 	# find the inverse of the matrix
-	i <- solve(m)
+	inv <- solve(mat, ...)
 	# cache the value of inverse in the special matrix object
-	x$setinv(i)
+	x$setinv(inv)
 	# return the value of the inverse
-	i
+	inv
 }
